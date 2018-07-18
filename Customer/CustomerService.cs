@@ -43,7 +43,7 @@ namespace Freemium.Game.Shop.Customer
                     throw new Exception("Not enough money");
                 }
 
-                InvetoryItem ii = new InvetoryItem
+                CustomerItem ii = new CustomerItem
                 {
                     Name = curItem.Name,
                     Price = curItem.Price,
@@ -51,7 +51,7 @@ namespace Freemium.Game.Shop.Customer
                     CustomerId = customerId
                 };
                 curCustomer.Ammount -= curItem.Price;
-                var inventoryList = sctx.Set<InvetoryItem>();
+                var inventoryList = sctx.Set<CustomerItem>();
                 inventoryList.Add(ii);
 
                 sctx.SaveChanges();
