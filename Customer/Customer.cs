@@ -17,7 +17,7 @@ namespace Freemium.Game.Shop.Customer
         public int ExternalId { get; set; }
 
         [Column("Customer Inventory")]
-        public ICollection<InvetoryItem> Inventory{ get; set; }
+        public ICollection<CustomerItem> Inventory{ get; set; }
 
     }
 }

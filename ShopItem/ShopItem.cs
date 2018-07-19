@@ -2,6 +2,7 @@
 
 namespace Freemium.Game.Shop.ShopItem
 {
+    [Table("Shop Item")]
     internal class ShopItem
     {
         [Column("Item Price")]

@@ -2,7 +2,8 @@
 
 namespace Freemium.Game.Shop.InvetntoryItem
 {
-    internal class InvetoryItem
+    [Table("Customer Item")]
+    internal class CustomerItem
     {
         public int Id { get; set; }
 
@@ -16,3 +17,5 @@ namespace Freemium.Game.Shop.InvetntoryItem
         public string Name { get; set; }
     }
 }
+
+

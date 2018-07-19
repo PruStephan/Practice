@@ -23,6 +23,7 @@ namespace Freemium.Game.Shop.Client
                 var curClient = sctx.Clients.Include(c => c.Items).SingleOrDefault(c => c.Id == clientId);
                 curClient.Items.Add(new ShopItem.ShopItem { Name = name, Price = price, ClientId = curClient.Id });
 
+
                 sctx.SaveChanges();
             }
         }

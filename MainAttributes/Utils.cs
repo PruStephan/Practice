@@ -22,7 +22,7 @@ namespace Freemium.Game.Shop.MainAttributes
                     {
                         Console.WriteLine(c.Id + " :: Ammount :: " + c.Ammount + "$$ :: Inventory:");
 
-                        var inventory_list = sctx.Set<InvetoryItem>().Where(i => i.CustomerId == c.Id).ToList();
+                        var inventory_list = sctx.Set<CustomerItem>().Where(i => i.CustomerId == c.Id).ToList();
 
                         foreach (var i in inventory_list)
                         {

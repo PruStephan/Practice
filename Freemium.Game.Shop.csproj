@@ -111,7 +111,7 @@
     <Compile Include="MainAttributes\ShopContext.cs" />
     <Compile Include="Client\Client.cs" />
     <Compile Include="Customer\Customer.cs" />
-    <Compile Include="InvetntoryItem\InvetoryItem.cs" />
+    <Compile Include="InvetntoryItem\CustomerItem.cs" />
     <Compile Include="ShopItem\ShopItem.cs" />
     <Compile Include="MainAttributes\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
