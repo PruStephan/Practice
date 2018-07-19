@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace FreemiumGameShop.Client
+namespace FreemiumGameShop.DataAccess
 {
     [Table("Client")]
     internal class Client
@@ -11,9 +11,9 @@ namespace FreemiumGameShop.Client
         public string Name { get; set; }
 
         [Column]
-        public ICollection<Customer.Customer> Customers { get; set; }
+        public ICollection<Customer> Customers { get; set; }
 
         [Column]
-        public ICollection<ShopItem.ShopItem> Items{ get; set; }
+        public ICollection<ShopItem> Items{ get; set; }
     }
 }

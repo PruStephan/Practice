@@ -10,7 +10,7 @@ namespace FreemiumGameShop.MainAttributes
             Database.SetInitializer<ShopContext>(new DropCreateDatabaseAlways<ShopContext>());
         }
 
-        public DbSet<Client.Client> Clients
+        public DbSet<DataAccess.Client> Clients
         {
             get;
             set;

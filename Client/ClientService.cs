@@ -10,7 +10,7 @@ namespace FreemiumGameShop.Client
         {
             using (var sctx = new ShopContext())
             {
-                var cl = new Client { Name = name };
+                var cl = new DataAccess.Client { Name = name };
                 sctx.Clients.Add(cl);
                 sctx.SaveChanges();
             }
@@ -21,7 +21,7 @@ namespace FreemiumGameShop.Client
             using (var sctx = new ShopContext())
             {
                 var curClient = sctx.Clients.Include(c => c.Items).SingleOrDefault(c => c.Id == clientId);
-                curClient.Items.Add(new ShopItem.ShopItem { Name = name, Price = price, ClientId = curClient.Id });
+                curClient.Items.Add(new DataAccess.ShopItem { Name = name, Price = price, ClientId = curClient.Id });
 
 
                 sctx.SaveChanges();
@@ -34,7 +34,7 @@ namespace FreemiumGameShop.Client
             {
                 var clientList = sctx.Clients.Include(s => s.Customers).ToList();
                 var curClient = clientList.SingleOrDefault(s => s.Id == clientId);
-                curClient?.Customers.Add(new Customer.Customer { ClientId = curClient.Id, Ammount = ammount});
+                curClient?.Customers.Add(new DataAccess.Customer { ClientId = curClient.Id, Ammount = ammount});
 
                 sctx.SaveChanges();
             }

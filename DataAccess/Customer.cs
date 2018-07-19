@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using FreemiumGameShop.InvetntoryItem;
 
-namespace FreemiumGameShop.Customer
+namespace FreemiumGameShop.DataAccess
 {
     [Table("Customer")]
     internal class Customer

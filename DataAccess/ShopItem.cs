@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace FreemiumGameShop.ShopItem
+namespace FreemiumGameShop.DataAccess
 {
     [Table("Shop Item")]
     internal class ShopItem

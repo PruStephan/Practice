@@ -109,10 +109,10 @@
     <Compile Include="ShopItem\ShopItemController.cs" />
     <Compile Include="MainAttributes\Startup.cs" />
     <Compile Include="MainAttributes\ShopContext.cs" />
-    <Compile Include="Client\Client.cs" />
-    <Compile Include="Customer\Customer.cs" />
-    <Compile Include="InvetntoryItem\CustomerItem.cs" />
-    <Compile Include="ShopItem\ShopItem.cs" />
+    <Compile Include="DataAccess\Client.cs" />
+    <Compile Include="DataAccess\Customer.cs" />
+    <Compile Include="DataAccess\CustomerItem.cs" />
+    <Compile Include="DataAccess\ShopItem.cs" />
     <Compile Include="MainAttributes\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShopItem\ShopItemService.cs" />
@@ -138,6 +138,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="CustomerItem\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Data.Entity;
 using System.Linq;
-using FreemiumGameShop.InvetntoryItem;
 using FreemiumGameShop.MainAttributes;
 
 namespace FreemiumGameShop.Customer
@@ -12,7 +11,7 @@ namespace FreemiumGameShop.Customer
         {
             using (var sctx = new ShopContext())
             {
-                var c = new Customer();
+                var c = new DataAccess.Customer();
                 sctx.Clients
                     .FirstOrDefault(cl => cl.Id == clientId)
                     ?.Customers
@@ -43,7 +42,7 @@ namespace FreemiumGameShop.Customer
                     throw new Exception("Not enough money");
                 }
 
-                CustomerItem ii = new CustomerItem
+                var ii = new DataAccess.CustomerItem
                 {
                     Name = curItem.Name,
                     Price = curItem.Price,
@@ -51,7 +50,7 @@ namespace FreemiumGameShop.Customer
                     CustomerId = customerId
                 };
                 curCustomer.Ammount -= curItem.Price;
-                var inventoryList = sctx.Set<CustomerItem>();
+                var inventoryList = sctx.Set<DataAccess.CustomerItem>();
                 inventoryList.Add(ii);
 
                 sctx.SaveChanges();

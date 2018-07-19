@@ -4,7 +4,7 @@ namespace FreemiumGameShop.Customer
 {
     internal class CustomerController : ApiController
     {
-        [Route("api/addcustomer/{name}")]
+        [Route("api/customer/{name}/add")]
         [HttpPost]
         public void PostCustomer(int clientId, string name)
         {
@@ -12,7 +12,7 @@ namespace FreemiumGameShop.Customer
             cls.CreateCustomer(clientId);
         }
 
-        [Route("api/purchase/{item_name}")]
+        [Route("api/customer/{item_name}/purchase")]
         public void Purchase(int clienId, int customerId, string itemName)
         {
         }
