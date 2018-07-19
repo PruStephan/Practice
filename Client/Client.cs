@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Freemium.Game.Shop.Client
+namespace FreemiumGameShop.Client
 {
     [Table("Client")]
     internal class Client

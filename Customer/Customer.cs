@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using Freemium.Game.Shop.InvetntoryItem;
+using FreemiumGameShop.InvetntoryItem;
 
-namespace Freemium.Game.Shop.Customer
+namespace FreemiumGameShop.Customer
 {
     [Table("Customer")]
     internal class Customer
@@ -12,11 +12,10 @@ namespace Freemium.Game.Shop.Customer
 
         public int Id { get; set; }
 
-        public int Client_Id { get; set; }
+        public int ClientId { get; set; }
 
         public int ExternalId { get; set; }
 
-        [Column("Customer Inventory")]
         public ICollection<CustomerItem> Inventory{ get; set; }
 
     }

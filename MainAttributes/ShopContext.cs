@@ -1,6 +1,6 @@
 ﻿using System.Data.Entity;
 
-namespace Freemium.Game.Shop.MainAttributes
+namespace FreemiumGameShop.MainAttributes
 {
     internal class ShopContext : DbContext
     {

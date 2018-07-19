@@ -1,6 +1,6 @@
 ﻿using System.Web.Http;
 
-namespace Freemium.Game.Shop.Customer
+namespace FreemiumGameShop.Customer
 {
     internal class CustomerController : ApiController
     {

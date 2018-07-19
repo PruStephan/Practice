@@ -1,4 +1,4 @@
-﻿namespace Freemium.Game.Shop.ShopItem
+﻿namespace FreemiumGameShop.ShopItem
 {
     internal class ShopItemService
     {

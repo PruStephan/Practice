@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Data.Entity;
 using System.Linq;
-using Freemium.Game.Shop.InvetntoryItem;
-using Freemium.Game.Shop.MainAttributes;
+using FreemiumGameShop.InvetntoryItem;
+using FreemiumGameShop.MainAttributes;
 
-namespace Freemium.Game.Shop.Customer
+namespace FreemiumGameShop.Customer
 {
     public class CustomerService
     {
@@ -12,7 +12,7 @@ namespace Freemium.Game.Shop.Customer
         {
             using (var sctx = new ShopContext())
             {
-                var c = new Shop.Customer.Customer();
+                var c = new Customer();
                 sctx.Clients
                     .FirstOrDefault(cl => cl.Id == clientId)
                     ?.Customers

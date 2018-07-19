@@ -1,8 +1,8 @@
 ﻿using System.Data.Entity;
 using System.Linq;
-using Freemium.Game.Shop.MainAttributes;
+using FreemiumGameShop.MainAttributes;
 
-namespace Freemium.Game.Shop.Client
+namespace FreemiumGameShop.Client
 {
     internal class ClientService
     {
@@ -10,7 +10,7 @@ namespace Freemium.Game.Shop.Client
         {
             using (var sctx = new ShopContext())
             {
-                var cl = new Shop.Client.Client { Name = name };
+                var cl = new Client { Name = name };
                 sctx.Clients.Add(cl);
                 sctx.SaveChanges();
             }
@@ -34,7 +34,7 @@ namespace Freemium.Game.Shop.Client
             {
                 var clientList = sctx.Clients.Include(s => s.Customers).ToList();
                 var curClient = clientList.SingleOrDefault(s => s.Id == clientId);
-                curClient?.Customers.Add(new Customer.Customer { Client_Id = curClient.Id, Ammount = ammount});
+                curClient?.Customers.Add(new Customer.Customer { ClientId = curClient.Id, Ammount = ammount});
 
                 sctx.SaveChanges();
             }

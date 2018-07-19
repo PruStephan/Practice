@@ -1,9 +1,9 @@
 using System;
 using System.Linq;
-using Freemium.Game.Shop.Client;
-using Freemium.Game.Shop.Customer;
+using FreemiumGameShop.Client;
+using FreemiumGameShop.Customer;
 
-namespace Freemium.Game.Shop.MainAttributes
+namespace FreemiumGameShop.MainAttributes
 {
     internal class Program
     {

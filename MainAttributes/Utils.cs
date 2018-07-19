@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Data.Entity;
 using System.Linq;
-using Freemium.Game.Shop.InvetntoryItem;
+using FreemiumGameShop.InvetntoryItem;
 
-namespace Freemium.Game.Shop.MainAttributes
+namespace FreemiumGameShop.MainAttributes
 {
     internal class Utils
     {
