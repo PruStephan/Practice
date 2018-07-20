@@ -21,9 +21,9 @@ namespace FreemiumGameShop.MainAttributes
                     {
                         Console.WriteLine(c.Id + " :: Ammount :: " + c.Ammount + "$$ :: Inventory:");
 
-                        var inventory_list = sctx.Set<DataAccess.CustomerItem>().Where(i => i.CustomerId == c.Id).ToList();
+                        var inventoryList = sctx.Set<DataAccess.CustomerItem>().Where(i => i.CustomerId == c.Id).ToList();
 
-                        foreach (var i in inventory_list)
+                        foreach (var i in inventoryList)
                         {
                             Console.WriteLine("----------" + i.Name);
                         }

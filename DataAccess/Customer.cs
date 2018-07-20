@@ -11,6 +11,7 @@ namespace FreemiumGameShop.DataAccess
 
         public int Id { get; set; }
 
+        //[ForeignKey("Client")]
         public int ClientId { get; set; }
 
         public int ExternalId { get; set; }

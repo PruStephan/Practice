@@ -1,4 +1,6 @@
 ﻿using System.Data.Entity;
+using System.Security;
+using System.Xml.Serialization;
 
 namespace FreemiumGameShop.MainAttributes
 {

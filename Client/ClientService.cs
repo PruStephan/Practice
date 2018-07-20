@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using FreemiumGameShop.MainAttributes;
 
@@ -16,13 +17,12 @@ namespace FreemiumGameShop.Client
             }
         }
 
-        public void AddItem(int clientId, string name, double price)
+        public void AddItem(int clientId, string name, string code, double price)
         {
             using (var sctx = new ShopContext())
             {
-                var curClient = sctx.Clients.Include(c => c.Items).SingleOrDefault(c => c.Id == clientId);
-                curClient.Items.Add(new DataAccess.ShopItem { Name = name, Price = price, ClientId = curClient.Id });
-
+                sctx.Set<DataAccess.ShopItem>()
+                    .Add(new DataAccess.ShopItem() {ClientId = clientId, ItemCode = code, Name = name, Price = price});
 
                 sctx.SaveChanges();
             }
@@ -32,10 +32,8 @@ namespace FreemiumGameShop.Client
         {
             using (var sctx = new ShopContext())
             {
-                var clientList = sctx.Clients.Include(s => s.Customers).ToList();
-                var curClient = clientList.SingleOrDefault(s => s.Id == clientId);
-                curClient?.Customers.Add(new DataAccess.Customer { ClientId = curClient.Id, Ammount = ammount});
-
+                sctx.Set<DataAccess.Customer>()
+                    .Add(new DataAccess.Customer() { ClientId = clientId, Ammount = ammount});
                 sctx.SaveChanges();
             }
         }

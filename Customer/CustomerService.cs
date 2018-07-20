@@ -20,39 +20,36 @@ namespace FreemiumGameShop.Customer
             }
         }
 
-        public void ItemPurchase(int clientId, int customerId, string itemName)
+        public void ItemPurchase(int clientId, int customerId, string itemCode)
         {
             using (var sctx= new ShopContext())
             {
-                var clientList = sctx.Clients.Include(cl => cl.Items).Include(cl => cl.Customers).ToList();
+                var curClient = sctx.Clients.SingleOrDefault(c => c.Id == clientId);
 
-                var curClient = clientList.SingleOrDefault(cl => cl.Id == clientId);
+                var curItem = sctx.Set<DataAccess.ShopItem>().SingleOrDefault(i => i.ItemCode == itemCode);
 
-                var curCustomer = curClient.Customers.SingleOrDefault(c => c.Id == customerId);
-
-                var curItem = curClient.Items.SingleOrDefault(i => i.Name == itemName);
+                var curCustomer = sctx.Set<DataAccess.Customer>().SingleOrDefault(cust => cust.Id == customerId);
 
                 if (curItem == null)
                 {
-                    throw new Exception("There is no such item: " + itemName);
+                    throw new Exception("No such Item");
                 }
 
-                if (curCustomer.Ammount < curItem.Price)
+                if (curCustomer.Ammount < curItem.Price) 
                 {
-                    throw new Exception("Not enough money");
+                    throw  new Exception("Not enough money");
                 }
 
-                var ii = new DataAccess.CustomerItem
+                var ii = new DataAccess.CustomerItem()
                 {
-                    Name = curItem.Name,
-                    Price = curItem.Price,
                     ClientId = clientId,
-                    CustomerId = customerId
+                    Name = curItem.Name,
+                    CustomerId = customerId,
+                    ItemCode = curItem.ItemCode,
+                    Price = curItem.Price
                 };
-                curCustomer.Ammount -= curItem.Price;
-                var inventoryList = sctx.Set<DataAccess.CustomerItem>();
-                inventoryList.Add(ii);
 
+                sctx.Set<DataAccess.CustomerItem>().Add(ii);
                 sctx.SaveChanges();
             }
         }

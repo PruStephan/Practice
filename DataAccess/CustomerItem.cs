@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FreemiumGameShop.DataAccess
 {
@@ -7,11 +8,15 @@ namespace FreemiumGameShop.DataAccess
     {
         public int Id { get; set; }
 
+//        [ForeignKey("Client")]
         public int ClientId { get; set; }
 
+       // [ForeignKey("Customer")]
         public int CustomerId { get; set; }
 
         public double Price { get; set; }
+
+        public string ItemCode { get; set; }
 
         [Column ("Item Name")]
         public string Name { get; set; }
