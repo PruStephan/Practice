@@ -9,9 +9,7 @@ namespace FreemiumGameShop.Customer
         public void ItemPurchase(int clientId, int customerId, string itemCode)
         {
             using (var sctx = new DataAccess.ShopContext())
-            {
-                var curClient = sctx.Clients.SingleOrDefault(c => c.Id == clientId);
-
+            { 
                 var curItem = sctx.Set<DataAccess.ClientItem>().SingleOrDefault(i => i.Code == itemCode);
 
                 var curCustomer = sctx.Set<DataAccess.Customer>().SingleOrDefault(cust => cust.Id == customerId);
@@ -21,10 +19,17 @@ namespace FreemiumGameShop.Customer
                     throw new Exception("No such Item");
                 }
 
+                if (curCustomer == null)
+                {
+                    throw new Exception("Invaid customer");
+                }
+
                 if (curCustomer.Ammount < curItem.Price) 
                 {
                     throw new Exception("Not enough money");
                 }
+
+                curCustomer.Ammount -= curItem.Price; 
 
                 var ii = new DataAccess.CustomerItem()
                 {
