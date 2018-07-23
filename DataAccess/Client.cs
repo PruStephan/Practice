@@ -14,6 +14,6 @@ namespace FreemiumGameShop.DataAccess
         public ICollection<Customer> Customers { get; set; }
 
         [Column]
-        public ICollection<ShopItem> Items{ get; set; }
+        public ICollection<ClientItem> Items { get; set; }
     }
 }

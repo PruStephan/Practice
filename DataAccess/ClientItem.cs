@@ -3,20 +3,21 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FreemiumGameShop.DataAccess
 {
-    [Table("Shop Item")]
-    internal class ShopItem
+    [Table("ClientItem")]
+    internal class ClientItem
     {
-        [Column("Item Price")]
+        [Column("Price")]
         public double Price { get; set; }
 
-        [Column("Item Name")]
+        [Column("ItemName")]
         public string Name { get; set; }
 
         public int Id { get; set; }
         
-        public string ItemCode { get; set; }
+        [Column("Code")]
+        public string Code { get; set; }
 
-        //[ForeignKey("Client")]
+        [Column("ClientId")]
         public int ClientId { get; set; } 
     }
 }

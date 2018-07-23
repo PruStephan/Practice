@@ -4,17 +4,12 @@ namespace FreemiumGameShop.Customer
 {
     internal class CustomerController : ApiController
     {
-        [Route("api/customer/{name}/add")]
-        [HttpPost]
-        public void PostCustomer(int clientId, string name)
+        [Route("{clientId}/customer/{customerName}/item/{item_name}/purchase")]
+        [HttpPut]
+        public void Purchase(int clienId, int customerId, string itemCode)
         {
-            var cls = new CustomerService();
-            cls.CreateCustomer(clientId);
-        }
-
-        [Route("api/customer/{item_name}/purchase")]
-        public void Purchase(int clienId, int customerId, string itemName)
-        {
+            var custs = new CustomerService();
+            custs.ItemPurchase(clienId, customerId, itemCode);
         }
     }
 }

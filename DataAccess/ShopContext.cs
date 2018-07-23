@@ -2,7 +2,7 @@
 using System.Security;
 using System.Xml.Serialization;
 
-namespace FreemiumGameShop.MainAttributes
+namespace FreemiumGameShop.DataAccess
 {
     internal class ShopContext : DbContext
     {

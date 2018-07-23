@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using FreemiumGameShop.MainAttributes;
 
 namespace FreemiumGameShop.ShopItem
 {
@@ -8,15 +7,15 @@ namespace FreemiumGameShop.ShopItem
     {
         public string GetCode(int clientId, string name)
         {
-            using (var sctx = new MainAttributes.ShopContext())
+            using (var sctx = new DataAccess.ShopContext())
             {
-                var item = sctx.Set<DataAccess.ShopItem>().SingleOrDefault(i => i.Name == name && i.ClientId == clientId);
+                var item = sctx.Set<DataAccess.ClientItem>().SingleOrDefault(i => i.Name == name && i.ClientId == clientId);
                 if (item == null)
                 {
-                    throw new Exception("No such item in thse store: " + name);
+                    throw new Exception("No such item in this store: " + name);
                 }
 
-                return item.ItemCode;
+                return item.Code;
             }
         }
     }

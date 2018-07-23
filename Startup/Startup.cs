@@ -1,7 +1,7 @@
 ﻿using System.Web.Http;
 using Owin;
 
-namespace FreemiumGameShop.MainAttributes
+namespace FreemiumGameShop.Startup
 {
     public class Startup
     {
@@ -11,8 +11,7 @@ namespace FreemiumGameShop.MainAttributes
             config.Routes.MapHttpRoute(
                 name: "ClientController",
                 routeTemplate: "{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional}
-            );
+                defaults: new { id = RouteParameter.Optional });
 
             app.UseWebApi(config);
        }

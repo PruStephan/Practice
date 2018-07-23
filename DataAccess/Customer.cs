@@ -6,17 +6,15 @@ namespace FreemiumGameShop.DataAccess
     [Table("Customer")]
     internal class Customer
     {
-        [Column("Customer Wallet")]
+        [Column("Ammount")]
         public double Ammount { get; set; }
 
         public int Id { get; set; }
 
-        //[ForeignKey("Client")]
         public int ClientId { get; set; }
 
         public int ExternalId { get; set; }
 
-        public ICollection<CustomerItem> Inventory{ get; set; }
-
+        public ICollection<CustomerItem> Inventory { get; set; }
     }
 }
