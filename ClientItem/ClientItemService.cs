@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
 
-namespace FreemiumGameShop.ShopItem
+namespace FreemiumGameShop.ClientItem
 {
-    internal class ShopItemService
+    internal class ClientItemService
     {
         public string GetCode(int clientId, string name)
         {

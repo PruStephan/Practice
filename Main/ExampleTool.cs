@@ -14,7 +14,7 @@ namespace FreemiumGameShop.Main
         {
             var cs = new Client.ClientService();
             var custs = new Customer.CustomerService();
-            var sis = new ShopItem.ShopItemService();
+            var sis = new ClientItem.ClientItemService();
             cs.CreateClient("First shop");
             ClientService.AddCustomer(1, 1000);
             ClientService.AddCustomer(1, 1000);
@@ -35,7 +35,7 @@ namespace FreemiumGameShop.Main
         {
             var cs = new Client.ClientService();
             var custs = new Customer.CustomerService();
-            var sis = new ShopItem.ShopItemService();
+            var sis = new ClientItem.ClientItemService();
             cs.CreateClient("First shop");
             ClientService.AddCustomer(1, 1000);
             ClientService.AddCustomer(1, 1000);

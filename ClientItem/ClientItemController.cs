@@ -1,13 +1,13 @@
 ﻿using System.Web.Http;
 
-namespace FreemiumGameShop.ShopItem
+namespace FreemiumGameShop.ClientItem
 {
-    internal class ShopItemController : ApiController
+    internal class ClientItemController : ApiController
     {
         [Route("api/{controller}")]
         public void Post(string name, double price)
         {
-            ShopItemService shis = new ShopItemService();
+            ClientItemService shis = new ClientItemService();
           //  shis.CreateShopItem(name, price);
         }
     }

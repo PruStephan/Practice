@@ -2,9 +2,10 @@
 
 namespace FreemiumGameShop.Customer
 {
+    [RoutePrefix("client/{clientId}/customers/{customerId}")]
     internal class CustomerController : ApiController
     {
-        [Route("{clientId}/customer/{customerName}/item/{item_name}/purchase")]
+        [Route("items/{item_name}/purchase")]
         [HttpPut]
         public void Purchase(int clienId, int customerId, string itemCode)
         {

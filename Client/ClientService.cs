@@ -37,6 +37,16 @@ namespace FreemiumGameShop.Client
             }
         }
 
+        public static void AddCustomer(int clientId)
+        {
+            using (var sctx = new DataAccess.ShopContext())
+            {
+                sctx.Set<DataAccess.Customer>()
+                    .Add(new DataAccess.Customer() { ClientId = clientId, Ammount = 1000 });
+                sctx.SaveChanges();
+            }
+        }
+
         public static string GetCustomer(int clientId, int customerId)
         {
             using (var sctx = new DataAccess.ShopContext())
@@ -45,11 +55,26 @@ namespace FreemiumGameShop.Client
                     .SingleOrDefault(cust => cust.ClientId == clientId && cust.Id == customerId);
                 if (curCust != null)
                 {
-                    return curCust.ClientId + " :: " + curCust.Id + " :: " + curCust.Ammount + " :: " +
-                           curCust.Inventory.Count;
+                    return curCust.ClientId + " :: " + curCust.Id + " :: " + curCust.Ammount;
                 }
 
                 return "failed to find customer: " + customerId;
+            }
+        }
+
+        public static string GetItem(int clientId, string code)
+        {
+            using (var sctx = new DataAccess.ShopContext())
+            {
+                var curItem = sctx.Set<DataAccess.ClientItem>()
+                    .SingleOrDefault(item => item.ClientId == clientId && item.Code == code);
+                if (curItem!= null)
+                {
+                    return curItem.ClientId + " :: " + curItem.Name + " :: " + curItem.Code+ " :: " +
+                           curItem.Price;
+                }
+
+                return "failed to find customer: " + code;
             }
         }
     }

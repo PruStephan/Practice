@@ -108,7 +108,7 @@
     <Compile Include="Customer\CustomerController.cs" />
     <Compile Include="Customer\CustomerService.cs" />
     <Compile Include="Main\ExampleTool.cs" />
-    <Compile Include="ShopItem\ShopItemController.cs" />
+    <Compile Include="ClientItem\ClientItemController.cs" />
     <Compile Include="Startup\Startup.cs" />
     <Compile Include="DataAccess\ShopContext.cs" />
     <Compile Include="DataAccess\Client.cs" />
@@ -117,7 +117,7 @@
     <Compile Include="DataAccess\ClientItem.cs" />
     <Compile Include="Main\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ShopItem\ShopItemService.cs" />
+    <Compile Include="ClientItem\ClientItemService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Main\App.config" />
