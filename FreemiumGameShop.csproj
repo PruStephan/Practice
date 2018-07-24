@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{3C1945A2-564C-4967-BDAB-B9318FA90933}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Freemium.Game.Shop</RootNamespace>
-    <AssemblyName>Freemium.Game.Shop</AssemblyName>
+    <RootNamespace>FreemiumGameShop</RootNamespace>
+    <AssemblyName>FreemiumGameShop</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -103,25 +103,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Client\ClientController.cs" />
+    <Compile Include="ClientController\DefaultClientController.cs" />
     <Compile Include="Client\ClientService.cs" />
-    <Compile Include="Customer\CustomerController.cs" />
+    <Compile Include="CustomerControler\DefaultCustomerController.cs" />
     <Compile Include="Customer\CustomerService.cs" />
-    <Compile Include="Main\ExampleTool.cs" />
-    <Compile Include="ClientItem\ClientItemController.cs" />
-    <Compile Include="Startup\Startup.cs" />
+    <Compile Include="DataModels\ClientItemModel.cs" />
+    <Compile Include="DataModels\ClientModel.cs" />
+    <Compile Include="DataModels\CustomerItemModel.cs" />
+    <Compile Include="DataModels\CustomerModel.cs" />
+    <Compile Include="Example\ExampleTool.cs" />
+    <Compile Include="ClientItemController\DefaultClientItemController.cs" />
+    <Compile Include="WebAPI\Startup.cs" />
     <Compile Include="DataAccess\ShopContext.cs" />
     <Compile Include="DataAccess\Client.cs" />
     <Compile Include="DataAccess\Customer.cs" />
     <Compile Include="DataAccess\CustomerItem.cs" />
     <Compile Include="DataAccess\ClientItem.cs" />
-    <Compile Include="Main\Program.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ClientItem\ClientItemService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Main\App.config" />
-    <None Include="Main\packages.config">
+    <None Include="App.config" />
+    <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
@@ -137,8 +141,6 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="CustomerItem\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

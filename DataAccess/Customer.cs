@@ -6,10 +6,11 @@ namespace FreemiumGameShop.DataAccess
     [Table("Customer")]
     internal class Customer
     {
-        [Column("Ammount")]
         public double Ammount { get; set; }
 
         public int Id { get; set; }
+
+        public string Nickname { get; set; }
 
         public int ClientId { get; set; }
 

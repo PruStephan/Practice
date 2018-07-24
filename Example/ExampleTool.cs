@@ -4,9 +4,11 @@ using System.Linq;
 using System.Net.Http;
 using System.Xml.Serialization;
 using FreemiumGameShop.Client;
+using FreemiumGameShop.DataModels;
+using FreemiumGameShop.WebAPI;
 using Microsoft.Owin.Hosting;
 
-namespace FreemiumGameShop.Main
+namespace FreemiumGameShop.Example
 {
     internal class ExampleTool
     {
@@ -15,46 +17,31 @@ namespace FreemiumGameShop.Main
             var cs = new Client.ClientService();
             var custs = new Customer.CustomerService();
             var sis = new ClientItem.ClientItemService();
-            cs.CreateClient("First shop");
-            ClientService.AddCustomer(1, 1000);
-            ClientService.AddCustomer(1, 1000);
-            ClientService.AddItem(1, "Emperor's sword", "asdgdi", 500);
-            ClientService.AddItem(1, "The Book of Magnus", "ygfoewrg", 120);
-            ClientService.AddItem(1, "Sword of phoenix", "sabgoiswbvg", 400);
+            ClientService.CreateClient(new ClientModel() { Name = "First client" });
+            //ClientService.AddCustomer(1, 1000);
+            //ClientService.AddCustomer(1, 1000);
+            //ClientService.AddItem(1, "Emperor's sword", "asdgdi", 500);
+            //ClientService.AddItem(1, "The Book of Magnus", "ygfoewrg", 120);
+            //ClientService.AddItem(1, "Sword of phoenix", "sabgoiswbvg", 400);
 
-            string i1 = sis.GetCode(1, "Emperor's sword");
-            string i2 = sis.GetCode(1, "The Book of Magnus");
-            string i3 = sis.GetCode(1, "Sword of phoenix");
+//            string i1 = sis.GetCode(1, "Emperor's sword");
+ //           string i2 = sis.GetCode(1, "The Book of Magnus");
+   //         string i3 = sis.GetCode(1, "Sword of phoenix");
 
-            custs.ItemPurchase(1, 1, i1);
-            custs.ItemPurchase(1, 1, i2);
-            custs.ItemPurchase(1, 2, i3);
+        //    custs.ItemPurchase(1, 1, i1);
+          //  custs.ItemPurchase(1, 1, i2);
+            //custs.ItemPurchase(1, 2, i3);
         }
 
         public void Example2()
         {
-            var cs = new Client.ClientService();
             var custs = new Customer.CustomerService();
             var sis = new ClientItem.ClientItemService();
-            cs.CreateClient("First shop");
-            ClientService.AddCustomer(1, 1000);
-            ClientService.AddCustomer(1, 1000);
-            ClientService.AddItem(1, "Emperor's sword", "asdgdi", 500);
-            ClientService.AddItem(1, "The Book of Magnus", "ygfoewrg", 120);
-            ClientService.AddItem(1, "Sword of phoenix", "sabgoiswbvg", 400);
+            ClientService.CreateClient(new ClientModel() { Name = "First client" });
 
-         /*   string i1 = sis.GetCode(1, "Emperor's sword");
-            string i2 = sis.GetCode(1, "The Book of Magnus");
-            String i3 = sis.GetCode(1, "Sword of phoenix");
-
-            custs.ItemPurchase(1, 1, i1);
-            custs.ItemPurchase(1, 1, i2);
-            custs.ItemPurchase(1, 2, i3);
-
-    */
             string address = "http://localhost:9000/";
 
-            using (WebApp.Start<Startup.Startup>(address))
+            using (WebApp.Start<WebAPI.Startup>(address))
             {
                 HttpClient client = new HttpClient();
 

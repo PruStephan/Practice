@@ -8,16 +8,12 @@ namespace FreemiumGameShop.DataAccess
     {
         public int Id { get; set; }
 
-        [Column("CustomerId")]
         public int CustomerId { get; set; }
 
-        [Column("Price")]
         public double Price { get; set; }
 
-        [Column("Code")]
-        public string ItemCode { get; set; }
+        public string Code { get; set; }
 
-        [Column("ItemName")]
-        public string Name { get; set; }
+         public string Name { get; set; }
     }
 }

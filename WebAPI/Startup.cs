@@ -1,7 +1,7 @@
 ﻿using System.Web.Http;
 using Owin;
 
-namespace FreemiumGameShop.Startup
+namespace FreemiumGameShop.WebAPI
 {
     public class Startup
     {
