@@ -68,7 +68,7 @@ namespace FreemiumGameShop.Example
                     var customers = client.Customers.ToList();
                     foreach (var c in client.Customers)
                     {
-                        Console.WriteLine(c.Id + " :: Ammount :: " + c.Ammount + "$$ :: Inventory:");
+                        Console.WriteLine(c.Id + " :: Amount :: " + c.Amount + "$$ :: Inventory:");
 
                         var inventoryList = sctx.Set<DataAccess.CustomerItem>().Where(i => i.CustomerId == c.Id).ToList();
 

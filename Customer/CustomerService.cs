@@ -26,12 +26,12 @@ namespace FreemiumGameShop.Customer
                     throw new Exception("Invaid customer");
                 }
 
-                if (curCustomer.Ammount < curItem.Price) 
+                if (curCustomer.Amount < curItem.Price) 
                 {
                     throw new Exception("Not enough money");
                 }
 
-                curCustomer.Ammount -= curItem.Price; 
+                curCustomer.Amount -= curItem.Price; 
 
                 var ii = new DataAccess.CustomerItem()
                 {
@@ -54,7 +54,7 @@ namespace FreemiumGameShop.Customer
                     .SingleOrDefault(cust => cust.ClientId == clientId && cust.Id == customerId);
                 if (curCust != null)
                 {
-                    return curCust.ClientId + " :: " + curCust.Id + " :: " + curCust.Ammount;
+                    return curCust.ClientId + " :: " + curCust.Id + " :: " + curCust.Amount;
                 }
 
                 return "failed to find customer: " + customerId;
@@ -66,7 +66,7 @@ namespace FreemiumGameShop.Customer
             using (var sctx = new DataAccess.ShopContext())
             {
                 sctx.Set<DataAccess.Customer>()
-                    .Add(new DataAccess.Customer() { ClientId = clientId, Ammount = model.Ammount, Nickname = model.Nickname});
+                    .Add(new DataAccess.Customer() { ClientId = clientId, Amount = model.Ammount, Nickname = model.Nickname});
                 sctx.SaveChanges();
             }
         }
@@ -82,7 +82,7 @@ namespace FreemiumGameShop.Customer
                     throw new Exception("There is no such Customer");
                 }
 
-                curCustomer.Ammount = model.Ammount;
+                curCustomer.Amount = model.Ammount;
                 curCustomer.Nickname = model.Nickname;
 
                 sctx.SaveChanges();
@@ -110,7 +110,7 @@ namespace FreemiumGameShop.Customer
                     throw new Exception("There is no such item");
                 }
 
-                return new CustomerModel() { Ammount = curCustomer.Ammount, Nickname = curCustomer.Nickname};
+                return new CustomerModel() { Ammount = curCustomer.Amount, Nickname = curCustomer.Nickname};
             }
         }
 

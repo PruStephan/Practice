@@ -6,7 +6,7 @@ namespace FreemiumGameShop.DataAccess
     [Table("Customer")]
     internal class Customer
     {
-        public double Ammount { get; set; }
+        public double Amount { get; set; }
 
         public int Id { get; set; }
 
