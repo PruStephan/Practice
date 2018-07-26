@@ -1,61 +1,118 @@
 ﻿using System;
 using System.Data.Entity;
 using System.Linq;
-using Freemium.Game.Shop.InvetntoryItem;
-using Freemium.Game.Shop.MainAttributes;
+using FreemiumGameShop.DataAccess;
+using FreemiumGameShop.DataModels;
 
-namespace Freemium.Game.Shop.Customer
+namespace FreemiumGameShop.Customer
 {
     public class CustomerService
     {
-        public void CreateCustomer(int clientId)
+        public void ItemPurchase(int clientId, int customerId, string itemCode)
         {
-            using (var sctx = new ShopContext())
-            {
-                var c = new Shop.Customer.Customer();
-                sctx.Clients
-                    .FirstOrDefault(cl => cl.Id == clientId)
-                    ?.Customers
-                    .Add(c);
-                sctx.SaveChanges();
-            }
-        }
+            using (var sctx = new DataAccess.ShopContext())
+            { 
+                var curItem = sctx.Set<DataAccess.ClientItem>().SingleOrDefault(i => i.Code == itemCode);
 
-        public void ItemPurchase(int clientId, int customerId, string itemName)
-        {
-            using (var sctx= new ShopContext())
-            {
-                var clientList = sctx.Clients.Include(cl => cl.Items).Include(cl => cl.Customers).ToList();
-
-                var curClient = clientList.SingleOrDefault(cl => cl.Id == clientId);
-
-                var curCustomer = curClient.Customers.SingleOrDefault(c => c.Id == customerId);
-
-                var curItem = curClient.Items.SingleOrDefault(i => i.Name == itemName);
+                var curCustomer = sctx.Set<DataAccess.Customer>().SingleOrDefault(cust => cust.Id == customerId);
 
                 if (curItem == null)
                 {
-                    throw new Exception("There is no such item: " + itemName);
+                    throw new Exception("No such Item");
                 }
 
-                if (curCustomer.Ammount < curItem.Price)
+                if (curCustomer == null)
+                {
+                    throw new Exception("Invaid customer");
+                }
+
+                if (curCustomer.Amount < curItem.Price) 
                 {
                     throw new Exception("Not enough money");
                 }
 
-                InvetoryItem ii = new InvetoryItem
+                curCustomer.Amount -= curItem.Price; 
+
+                var ii = new DataAccess.CustomerItem()
                 {
                     Name = curItem.Name,
-                    Price = curItem.Price,
-                    ClientId = clientId,
-                    CustomerId = customerId
+                    CustomerId = customerId,
+                    Code = curItem.Code,
+                    Price = curItem.Price
                 };
-                curCustomer.Ammount -= curItem.Price;
-                var inventoryList = sctx.Set<InvetoryItem>();
-                inventoryList.Add(ii);
+
+                sctx.Set<DataAccess.CustomerItem>().Add(ii);
+                sctx.SaveChanges();
+            }
+        }
+
+        public static string GetCustomer(int clientId, int customerId)
+        {
+            using (var sctx = new DataAccess.ShopContext())
+            {
+                var curCust = sctx.Set<DataAccess.Customer>()
+                    .SingleOrDefault(cust => cust.ClientId == clientId && cust.Id == customerId);
+                if (curCust != null)
+                {
+                    return curCust.ClientId + " :: " + curCust.Id + " :: " + curCust.Amount;
+                }
+
+                return "failed to find customer: " + customerId;
+            }
+        }
+
+        public static void CreateCustomer(int clientId, CustomerCreateModel model)
+        {
+            using (var sctx = new DataAccess.ShopContext())
+            {
+                sctx.Set<DataAccess.Customer>()
+                    .Add(new DataAccess.Customer() { ClientId = clientId, Amount = model.Ammount, Nickname = model.Nickname});
+                sctx.SaveChanges();
+            }
+        }
+
+        public static void UpdateCustomer(int clientId, int customerId, CustomerCreateModel model)
+        {
+            using (var sctx = new DataAccess.ShopContext())
+            {
+                var curCustomer = sctx.Set<DataAccess.Customer>()
+                    .SingleOrDefault(cust => cust.ClientId == clientId && cust.Id == customerId);
+                if (curCustomer== null)
+                {
+                    throw new Exception("There is no such Customer");
+                }
+
+                curCustomer.Amount = model.Ammount;
+                curCustomer.Nickname = model.Nickname;
 
                 sctx.SaveChanges();
             }
         }
+
+        public static void Deletecustomer(int clientId, int customerId)
+        {
+            using (var sctx = new ShopContext())
+            {
+                var curCustomer = sctx.Set<DataAccess.Customer>().SingleOrDefault(cust => cust.ClientId == clientId && cust.Id == customerId);
+                sctx.Set<DataAccess.Customer>().Remove(curCustomer ?? throw new Exception("There is no such Customer"));
+                sctx.SaveChanges();
+            }
+        }
+
+        public static CustomerCreateModel GetItem(int clientId, int customerId)
+        {
+            using (var sctx = new DataAccess.ShopContext())
+            {
+                var curCustomer= sctx.Set<DataAccess.Customer>()
+                    .SingleOrDefault(cust => cust.ClientId == clientId && cust.Id == clientId);
+                if (curCustomer== null)
+                {
+                    throw new Exception("There is no such item");
+                }
+
+                return new CustomerCreateModel() { Ammount = curCustomer.Amount, Nickname = curCustomer.Nickname};
+            }
+        }
+
     }
 }

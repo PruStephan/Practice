@@ -1,41 +1,62 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
+using System.Data.Entity.Core.Metadata.Edm;
+using System.Data.Entity.Migrations;
 using System.Linq;
-using Freemium.Game.Shop.MainAttributes;
+using System.Runtime.CompilerServices;
+using FreemiumGameShop.DataAccess;
+using FreemiumGameShop.DataModels;
 
-namespace Freemium.Game.Shop.Client
+namespace FreemiumGameShop.Client
 {
     internal class ClientService
     {
-        public void CreateClient(string name)
+        public static void CreateClient(ClientCreateModel clm)
         {
             using (var sctx = new ShopContext())
             {
-                var cl = new Shop.Client.Client { Name = name };
+                var cl = new DataAccess.Client { Name = clm.Name};
                 sctx.Clients.Add(cl);
                 sctx.SaveChanges();
             }
         }
 
-        public void AddItem(int clientId, string name, double price)
+        public static void UpdateClient(int clientId, ClientCreateModel clm)
         {
             using (var sctx = new ShopContext())
             {
-                var curClient = sctx.Clients.Include(c => c.Items).SingleOrDefault(c => c.Id == clientId);
-                curClient.Items.Add(new ShopItem.ShopItem { Name = name, Price = price, ClientId = curClient.Id });
+                var curClient = sctx.Clients.SingleOrDefault(cl => cl.Id == clientId);
+                if (curClient == null)
+                {
+                    throw new Exception("There is no client with this ID");
+                }
 
+                curClient.Name = clm.Name;
                 sctx.SaveChanges();
             }
         }
 
-        public void AddCustomer(int clientId, double ammount)
+        public static void DeleteClient(int clientId)
         {
             using (var sctx = new ShopContext())
             {
-                var clientList = sctx.Clients.Include(s => s.Customers).ToList();
-                var curClient = clientList.SingleOrDefault(s => s.Id == clientId);
-                curClient?.Customers.Add(new Customer.Customer { Client_Id = curClient.Id, Ammount = ammount});
-
+                var toDel = sctx.Clients.SingleOrDefault(cl => cl.Id == clientId);
+                sctx.Clients.Remove(toDel ?? throw new Exception("There is no client with this ID"));
                 sctx.SaveChanges();
+            }
+        }
+
+        public static ClientCreateModel GetClient(int clientId)
+        {
+            using (var sctx = new ShopContext())
+            {
+                var curClient = sctx.Clients.SingleOrDefault(cl => cl.Id == clientId);
+                if (curClient == null)
+                {
+                    throw new Exception("There is no client with this ID");
+                }
+                var model = new ClientCreateModel() { Name = curClient.Name };
+                return model;
             }
         }
     }
