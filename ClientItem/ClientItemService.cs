@@ -21,7 +21,7 @@ namespace FreemiumGameShop.ClientItem
             }
         }
 
-        public static void CreateItem(int clientId, ClientItemModel clim)
+        public static void CreateItem(int clientId, ClientItemCreateModel clim)
         {
             using (var sctx = new DataAccess.ShopContext())
             {
@@ -31,7 +31,7 @@ namespace FreemiumGameShop.ClientItem
             }
         }
 
-        public static void UpdateItem(int clientId, string code, ClientItemModel model)
+        public static void UpdateItem(int clientId, string code, ClientItemCreateModel createModel)
         {
             using (var sctx = new DataAccess.ShopContext())
             {
@@ -42,9 +42,9 @@ namespace FreemiumGameShop.ClientItem
                     throw new Exception("There is no such item");
                 }
 
-                curItem.Name = model.Name;
-                curItem.Code = model.Code;
-                curItem.Price = model.Price;
+                curItem.Name = createModel.Name;
+                curItem.Code = createModel.Code;
+                curItem.Price = createModel.Price;
 
                 sctx.SaveChanges();
             }
@@ -60,7 +60,7 @@ namespace FreemiumGameShop.ClientItem
             }
         }
 
-        public static ClientItemModel GetItem(int clientId, string code)
+        public static ClientItemCreateModel GetItem(int clientId, string code)
         {
             using (var sctx = new DataAccess.ShopContext())
             {
@@ -71,7 +71,7 @@ namespace FreemiumGameShop.ClientItem
                     throw new Exception("There is no such item");
                 }
                 
-                return new ClientItemModel() { Code = curItem.Code, Name = curItem.Name, Price = curItem.Price};
+                return new ClientItemCreateModel() { Code = curItem.Code, Name = curItem.Name, Price = curItem.Price};
             }
         }
     }

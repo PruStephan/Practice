@@ -4,10 +4,10 @@ using FreemiumGameShop.DataModels;
 
 namespace FreemiumGameShop.CustomerControler
 {
-    [RoutePrefix("client/{clientId}")]
+    [RoutePrefix("clients/customers")]
     internal class DefaultCustomerController : ApiController
     {
-        [Route("customers/{customerId}/items/{item_name}/purchase")]
+        [Route("{customerId}/items/code/{itemCode}/purchase")]
         [HttpPut]
         public void Purchase(int clienId, int customerId, string itemCode)
         {
@@ -15,28 +15,28 @@ namespace FreemiumGameShop.CustomerControler
             custs.ItemPurchase(clienId, customerId, itemCode);
         }
 
-        [Route("customers/{customerId}/new/model/{model}")]
+        [Route("")]
         [HttpPost]
-        public void CreateCustomer(int clientId, CustomerModel model)
+        public void CreateCustomer(int clientId, CustomerCreateModel model)
         {
             CustomerService.CreateCustomer(clientId, model);
         }
 
-        [Route("customers/{customerId}/update/model/{model}")]
+        [Route("{customerId}/update")]
         [HttpPut]
-        public void UpdateItem(int clientId, int customerId, CustomerModel model)
+        public void UpdateItem(int clientId, int customerId, CustomerCreateModel model)
         {
             CustomerService.UpdateCustomer(clientId, customerId, model);
         }
 
-        [Route("customers/{customerId}/delete")]
+        [Route("{customerId}/delete")]
         [HttpDelete]
         public void DeleteItem(int clientId, int customerId)
         {
             CustomerService.Deletecustomer(clientId, customerId);
         }
 
-        [Route("customers/{customerId}/{code}/get")]
+        [Route("{customerId}/code/{code}/get")]
         [HttpGet]
         public void GetItem(int clientId, int customerId)
         {

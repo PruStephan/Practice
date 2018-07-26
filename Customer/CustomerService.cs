@@ -61,7 +61,7 @@ namespace FreemiumGameShop.Customer
             }
         }
 
-        public static void CreateCustomer(int clientId, CustomerModel model)
+        public static void CreateCustomer(int clientId, CustomerCreateModel model)
         {
             using (var sctx = new DataAccess.ShopContext())
             {
@@ -71,7 +71,7 @@ namespace FreemiumGameShop.Customer
             }
         }
 
-        public static void UpdateCustomer(int clientId, int customerId, CustomerModel model)
+        public static void UpdateCustomer(int clientId, int customerId, CustomerCreateModel model)
         {
             using (var sctx = new DataAccess.ShopContext())
             {
@@ -99,7 +99,7 @@ namespace FreemiumGameShop.Customer
             }
         }
 
-        public static CustomerModel GetItem(int clientId, int customerId)
+        public static CustomerCreateModel GetItem(int clientId, int customerId)
         {
             using (var sctx = new DataAccess.ShopContext())
             {
@@ -110,7 +110,7 @@ namespace FreemiumGameShop.Customer
                     throw new Exception("There is no such item");
                 }
 
-                return new CustomerModel() { Ammount = curCustomer.Amount, Nickname = curCustomer.Nickname};
+                return new CustomerCreateModel() { Ammount = curCustomer.Amount, Nickname = curCustomer.Nickname};
             }
         }
 

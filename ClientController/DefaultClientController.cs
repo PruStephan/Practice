@@ -5,33 +5,33 @@ using FreemiumGameShop.DataModels;
 
 namespace FreemiumGameShop.ClientController
 {
-    [RoutePrefix("clients/{clientId}")]
+    [RoutePrefix("clients")]
     public class DefaultClientController : ApiController
     {
-        [Route("creation/{clientModel}")]
+        [Route("")]
         [HttpPost]
-        public void CreateClient(ClientModel clientModel)
+        public void CreateClient(ClientCreateModel clientCreateModel)
         {
-            ClientService.CreateClient(clientModel);
+           ClientService.CreateClient(clientCreateModel);
         }
 
-        [Route("modification/{clientModel}")]
+        [Route("{clientId}/modification")]
         [HttpPut]
-        public void UpdateClient(int clientId, ClientModel clientModel)
+        public void UpdateClient(int clientId, ClientCreateModel clientCreateModel)
         {
-            ClientService.UpdateClient(clientId, clientModel);
+            ClientService.UpdateClient(clientId, clientCreateModel);
         }
 
-        [Route("deletion")]
+        [Route("{clientId}/deletion")]
         [HttpDelete]
         public void DeleteClient(int clientId)
         {
             ClientService.DeleteClient(clientId);
         }
 
-        [Route("returning")]
+        [Route("{clientId}/client")]
         [HttpGet]
-        public ClientModel GetClient(int clientId)
+        public ClientCreateModel GetClient(int clientId)
         {
             return ClientService.GetClient(clientId);
         }

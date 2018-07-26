@@ -4,21 +4,21 @@ using FreemiumGameShop.DataModels;
 
 namespace FreemiumGameShop.ClientItemController
 {
-    [RoutePrefix("clients/{clientId}/items")]
+    [RoutePrefix("clients/items")]
     internal class DefaultClientItemController : ApiController
     {
-        [Route("new/model/{model}")]
+        [Route("")]
         [HttpPost]
-        public void CreateItem(int clientId, ClientItemModel model)
+        public void CreateItem(int clientId, ClientItemCreateModel createModel)
         {
-            ClientItemService.CreateItem(clientId, model);
+            ClientItemService.CreateItem(clientId, createModel);
         }
 
-        [Route("code/{code}/update/model/{model}")]
+        [Route("code/{code}/update")]
         [HttpPut]
-        public void UpdateItem(int clientId, string code, ClientItemModel model)
+        public void UpdateItem(int clientId, string code, ClientItemCreateModel createModel)
         {
-            ClientItemService.UpdateItem(clientId, code, model);
+            ClientItemService.UpdateItem(clientId, code, createModel);
         }
 
         [Route("code/{code}/delete")]

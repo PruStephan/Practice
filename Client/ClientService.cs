@@ -11,7 +11,7 @@ namespace FreemiumGameShop.Client
 {
     internal class ClientService
     {
-        public static void CreateClient(ClientModel clm)
+        public static void CreateClient(ClientCreateModel clm)
         {
             using (var sctx = new ShopContext())
             {
@@ -21,7 +21,7 @@ namespace FreemiumGameShop.Client
             }
         }
 
-        public static void UpdateClient(int clientId, ClientModel clm)
+        public static void UpdateClient(int clientId, ClientCreateModel clm)
         {
             using (var sctx = new ShopContext())
             {
@@ -46,7 +46,7 @@ namespace FreemiumGameShop.Client
             }
         }
 
-        public static ClientModel GetClient(int clientId)
+        public static ClientCreateModel GetClient(int clientId)
         {
             using (var sctx = new ShopContext())
             {
@@ -55,7 +55,7 @@ namespace FreemiumGameShop.Client
                 {
                     throw new Exception("There is no client with this ID");
                 }
-                var model = new ClientModel() { Name = curClient.Name };
+                var model = new ClientCreateModel() { Name = curClient.Name };
                 return model;
             }
         }

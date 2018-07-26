@@ -11,13 +11,8 @@ namespace FreemiumGameShop
         public static void Main(string[] args)
         {
             var etool = new ExampleTool();
-            etool.Example1();
-            etool.ShowAll();
-            ClientService.UpdateClient(1, new ClientModel(){Name = "New name"});
-            etool.ShowAll();
-
-            Console.WriteLine(ClientService.GetClient(1).Name);
-
+            var x = etool.Example2 ();
+            //etool.ShowAll();
             Console.ReadKey();
         }
     }

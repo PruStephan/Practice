@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FreemiumGameShop.DataModels
 {
-    public class CustomerModel
+    public class CustomerCreateModel
     {
         public double Ammount { get; set; }
 

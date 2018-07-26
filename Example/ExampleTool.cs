@@ -2,11 +2,14 @@
 using System.Data.Entity;
 using System.Linq;
 using System.Net.Http;
-using System.Xml.Serialization;
+using System.Threading.Tasks;
 using FreemiumGameShop.Client;
+using FreemiumGameShop.ClientItem;
+using FreemiumGameShop.Customer;
 using FreemiumGameShop.DataModels;
-using FreemiumGameShop.WebAPI;
 using Microsoft.Owin.Hosting;
+using Flurl;
+using Flurl.Http;
 
 namespace FreemiumGameShop.Example
 {
@@ -17,42 +20,51 @@ namespace FreemiumGameShop.Example
             var cs = new Client.ClientService();
             var custs = new Customer.CustomerService();
             var sis = new ClientItem.ClientItemService();
-            ClientService.CreateClient(new ClientModel() { Name = "First client" });
-            //ClientService.AddCustomer(1, 1000);
-            //ClientService.AddCustomer(1, 1000);
-            //ClientService.AddItem(1, "Emperor's sword", "asdgdi", 500);
-            //ClientService.AddItem(1, "The Book of Magnus", "ygfoewrg", 120);
-            //ClientService.AddItem(1, "Sword of phoenix", "sabgoiswbvg", 400);
 
-//            string i1 = sis.GetCode(1, "Emperor's sword");
- //           string i2 = sis.GetCode(1, "The Book of Magnus");
-   //         string i3 = sis.GetCode(1, "Sword of phoenix");
+            ClientService.CreateClient(new ClientCreateModel() { Name = "First client" });
+            CustomerService.CreateCustomer(1, new CustomerCreateModel() { Ammount = 1000, Nickname = "Asdfg" });
+            CustomerService.CreateCustomer(1, new CustomerCreateModel() { Ammount = 1000, Nickname = "Qwery" });
 
-        //    custs.ItemPurchase(1, 1, i1);
-          //  custs.ItemPurchase(1, 1, i2);
-            //custs.ItemPurchase(1, 2, i3);
+            ClientItemService.CreateItem(1, new ClientItemCreateModel() {Name = "Emperor's sword", Code = "asdgdi", Price = 500});
+            ClientItemService.CreateItem(1, new ClientItemCreateModel() {Name = "The Book of Magnus", Code = "ygfoewrg", Price = 120});
+            ClientItemService.CreateItem(1, new ClientItemCreateModel() {Name = "Sword of phoenix", Code = "sabgoiswbvg", Price = 400});
+
+            string i1 = ClientItemService.GetItem(1, "asdgdi").Code;
+            string i2 = ClientItemService.GetItem(1, "ygfoewrg").Code;
+            string i3 = ClientItemService.GetItem(1, "sabgoiswbvg").Code;
+
+            custs.ItemPurchase(1, 1, i1);
+            custs.ItemPurchase(1, 1, i2);
+            custs.ItemPurchase(1, 2, i3);
         }
 
-        public void Example2()
+        public async Task Example2()
         {
-            var custs = new Customer.CustomerService();
-            var sis = new ClientItem.ClientItemService();
-            ClientService.CreateClient(new ClientModel() { Name = "First client" });
-
             string address = "http://localhost:9000/";
 
             using (WebApp.Start<WebAPI.Startup>(address))
             {
-                HttpClient client = new HttpClient();
+                var clientModel = new ClientCreateModel() {Name = "First Client"};
+                var customerModel = new CustomerCreateModel(){Ammount = 1000, Nickname = "Alex"};
+                var itemModel = new ClientItemCreateModel() {Code = "asd", Name = "Emperor's sword", Price = 500};
 
-                var resp1 = client.GetAsync(address + "client/1/get_customer/1").Result;
-                var resp2 = client.GetAsync(address + "client/1/get_customer/2").Result;
+                var clientUrl = new Url(address + "clients");
+                var resp = await clientUrl.PostJsonAsync(clientModel);
 
-                Console.WriteLine(resp1.Content.ReadAsStringAsync().Result);
-                Console.WriteLine(resp2.Content.ReadAsStringAsync().Result);
+                
+                Console.WriteLine(resp);
+
+                //ClientService.CreateClient(clientModel);
+
+                var customerUrl = new Url(address + "clients/customers").SetQueryParams(new { clientId = 1, model = customerModel });
+                var resp3 = await customerUrl.PostAsync(new HttpMessageContent(new HttpRequestMessage()));
+
+                Console.WriteLine(resp3);
+                var itemUrl = new Url(address + "clients/items");
+                var resp2 = await itemUrl.PostJsonAsync(new {clientId = 1, model = itemModel});
+
+                Console.WriteLine(resp2);
             }
-
-            Console.ReadKey();
         }
 
         public void ShowAll()
